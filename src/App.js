@@ -11,16 +11,16 @@ import { Submit } from "./components/Submit";
 import { ErrorGender } from "./components/ErrorGender";
 
 function App() {
-  const [firstName, setFirstName] = useState("");
+  const [firstName, setFirstName] = useState("none");
   const [firstNameValidation, setFirstNameValidation] = useState(false);
 
-  const [lastName, setLastName] = useState("");
+  const [lastName, setLastName] = useState("none");
   const [lastNameValidation, setLastNameValidation] = useState(false);
 
-  const [phoneNumber, setPhoneNumber] = useState(0);
+  const [phoneNumber, setPhoneNumber] = useState(111111111);
   const [phoneNumberValidation, setPhoneNumberValidation] = useState(false);
 
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("none@none.no");
   const [emailValidation, setEmailValidation] = useState(false);
 
   const [birthdateDay, setBirthdateDay] = useState("none");
@@ -33,9 +33,9 @@ function App() {
   const [yearValidation, setYearValidation] = useState(false);
 
   const [birthdateComplete, setBirthdateComplete] = useState([
-    "none",
-    "none",
-    "none",
+    "01",
+    "01",
+    "000",
   ]);
   const [birthdateValidation, setBirthdateValidation] = useState(false);
 
@@ -183,6 +183,27 @@ function App() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (firstName === "none") {
+      return setFirstNameValidation(false);
+    }
+    if (lastName === "none") {
+      return setLastNameValidation(false);
+    }
+
+    if (birthdateComplete.toString() === "01,00,0000") {
+      return setBirthdateValidation(false);
+    }
+
+    if (gender === "") {
+      return setGenderValidation(false);
+    }
+    if (email === "none@none.no") {
+      return setEmailValidation(false);
+    }
+
+    if (phoneNumber === 111111111) {
+      return setPhoneNumberValidation(false);
+    }
   };
 
   return (
