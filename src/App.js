@@ -35,20 +35,20 @@ function App() {
   const [birthdateComplete, setBirthdateComplete] = useState([
     "01",
     "01",
-    "000",
+    "0000",
   ]);
   const [birthdateValidation, setBirthdateValidation] = useState(false);
 
   const [isLeapYear, setIsLeapYear] = useState(false);
 
-  const [gender, setGender] = useState("");
+  const [gender, setGender] = useState("none");
   const [genderValidation, setGenderValidation] = useState(false);
 
   const handleFirstName = (event) => {
     setFirstName(event.target.value);
   };
   useEffect(() => {
-    if (firstName.match(/^[A-Z a-z Ñ ñ]{3,}$/)) {
+    if (firstName.match(/^[A-Z a-z Ñ ñ Áá Éé Íí Óó Úú]{3,}$/)) {
       setFirstNameValidation(true);
     } else setFirstNameValidation(false);
   }, [firstName]);
@@ -57,7 +57,7 @@ function App() {
     setLastName(event.target.value);
   };
   useEffect(() => {
-    if (lastName.match(/[A-Z a-z Ñ ñ]{3,}/)) {
+    if (lastName.match(/[A-Z a-z Ñ ñ Áá Éé Íí Óó Úú]{3,}/)) {
       setLastNameValidation(true);
     } else setLastNameValidation(false);
   }, [lastName]);
@@ -190,11 +190,19 @@ function App() {
       return setLastNameValidation(false);
     }
 
-    if (birthdateComplete.toString() === "01,00,0000") {
+    if (birthdateDay === "none") {
       return setBirthdateValidation(false);
     }
 
-    if (gender === "") {
+    if (birthdateMonth === "none") {
+      return setBirthdateValidation(false);
+    }
+
+    if (birthdateYear === "none") {
+      return setBirthdateValidation(false);
+    }
+
+    if (gender === "none") {
       return setGenderValidation(false);
     }
     if (email === "none@none.no") {
