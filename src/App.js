@@ -9,6 +9,7 @@ import { Birthdate } from "./components/Birthdate";
 import { Radio } from "./components/Radio";
 import { Submit } from "./components/Submit";
 import { ErrorGender } from "./components/ErrorGender";
+import { AllValid } from "./components/AllValid";
 
 function App() {
   const [firstName, setFirstName] = useState("none");
@@ -44,6 +45,8 @@ function App() {
   const [gender, setGender] = useState("none");
   const [genderValidation, setGenderValidation] = useState(false);
 
+  const [everythingValidated, setEverythingValidated] = useState(false);
+
   const handleFirstName = (event) => {
     setFirstName(event.target.value);
   };
@@ -76,7 +79,7 @@ function App() {
   };
   useEffect(() => {
     if (
-      email.match(/^[A-Z a-z \d Ñ ñ \- _]+@[A-Z a-z Ñ ñ]+\.[A-Z ñ a-z ñ]{2,3}$/)
+      email.match(/^[A-Z a-z \d Ñ ñ \- _]+@[A-Z a-z Ñ ñ]+\.[A-Z ñ a-z ñ]{2,}$/)
     ) {
       setEmailValidation(true);
     } else setEmailValidation(false);
@@ -212,6 +215,9 @@ function App() {
     if (phoneNumber === 111111111) {
       return setPhoneNumberValidation(false);
     }
+
+    setEverythingValidated(true);
+    console.log("ojete");
   };
 
   return (
@@ -247,9 +253,8 @@ function App() {
                   error={birthdateValidation}
                 />
               </fieldset>
-
               <fieldset className="form-group my-4">
-                <div className="d-flex justify-content-around">
+                <div className="d-flex justify-content-between">
                   <label style={{ color: genderValidation ? "black" : "red" }}>
                     Sexo:
                   </label>
@@ -292,6 +297,7 @@ function App() {
               </fieldset>
               <Submit />
             </form>
+            <AllValid val={everythingValidated} />
           </Col>
         </Row>
       </Container>
